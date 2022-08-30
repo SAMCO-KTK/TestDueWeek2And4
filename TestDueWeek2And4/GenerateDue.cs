@@ -18,20 +18,20 @@ namespace TestDueWeek2And4
                 DateTime lastDayInMonth = new(year, month, calendar.GetDaysInMonth(year, month));
 
                 int week2 = calendar.GetWeekOfYear(firstDayInMonth, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) + 1;
-                int week4 = calendar.GetWeekOfYear(firstDayInMonth, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) + 3;
+                int week4 = week2 + 2;
                 while (firstDayInMonth < lastDayInMonth)
                 {
+                    int curWeekNum = calendar.GetWeekOfYear(firstDayInMonth, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
                     if (firstDayInMonth.DayOfWeek == cutOfDay &&
-                        (calendar.GetWeekOfYear(firstDayInMonth, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == week2
-                        || calendar.GetWeekOfYear(firstDayInMonth, dfi.CalendarWeekRule, dfi.FirstDayOfWeek) == week4))
+                        (curWeekNum == week2 || curWeekNum == week4))
                     {
                         Console.WriteLine(string.Format("{0} Week {1} CutOf {2} Due15 {3} Due30 {4}",
                                                         firstDayInMonth.ToString("MMMM"),
-                                                        calendar.GetWeekOfYear(firstDayInMonth, dfi.CalendarWeekRule, dfi.FirstDayOfWeek),
+                                                       curWeekNum,
                                                         firstDayInMonth.ToString("dd/MM/yyyy"),
                                                         firstDayInMonth.AddDays(due15).ToString("dd/MM/yyyy"),
                                                         firstDayInMonth.AddMonths(1).ToString("dd/MM/yyyy")));
-                        firstDayInMonth = firstDayInMonth.AddDays(13);
+                        firstDayInMonth = firstDayInMonth.AddDays(14);
                     }
                     else
                     {
